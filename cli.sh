@@ -661,7 +661,7 @@ join_game() {
 resume_game() {
   # shellcheck disable=SC2159
   while [ 0 ] ; do
-    eval dialog "$DIALOG_OPTIONS" --title "$(quote "Please enter the game id, or 'list' for a list of games to join")" --inputbox "$(quote "Game ID: ")" 17 75 2> "$DIALOG_TMP" || break
+    eval dialog "$DIALOG_OPTIONS" --title "$(quote "Please enter the game id, or leave empty for a list of games to join")" --inputbox "$(quote "Game ID: ")" 17 75 2> "$DIALOG_TMP" || break
     game_id=$(cat "$DIALOG_TMP")
 
     if [ "x$game_id" = "xlist" ] || [ "x$game_id" = "x" ] ; then
@@ -1010,22 +1010,24 @@ while [ 0 ] ; do
       fi
     else
       set +e
-      eval dialog "$DIALOG_OPTIONS" --extra-button --extra-label "$(quote "Cancel")" --nocancel --ok-label "$(quote "Start")" --pause "$(quote "Other players can now join game $DLBOLD$game_id$DLBOLDRESET. Press enter when you are ready to start the game.")" 17 75 5
+      eval dialog "$DIALOG_OPTIONS" --default-button cancel --cancel-label "$(quote "Start")" --ok-label "$(quote "Refresh")" --extra-button --extra-label "$(quote "Back")" --pause "$(quote "Other players can now join game $DLBOLD$game_id$DLBOLDRESET. Press enter when you are ready to start the game.")" 17 75 5
       res=$?
       set -e
 
       refresh_game
 
-      if [ "$res" -eq 0 ] && [ "$game_phase" -eq 0 ] ; then
+      if [ "$res" -eq 1 ] && [ "$game_phase" -eq 0 ] ; then
         response="$(curl -v -X PATCH -b "$COOKIESTORE" -c "$COOKIESTORE" -H "Accept: application/json" "$URL/games/$game_id" 2>&1 | tr -d '\r')"
 
         if ! printf "%s\n" "$response" | grep "HTTP/1.1 204 No Content" > /dev/null 2>&1 ; then
           show_error "$response"
         fi
-      elif [ "$res" -ne 3 ] ; then
-        exit "$res"
-      else
+      elif [ "$res" -eq 3 ] ; then
         break
+      elif [ "$res" -eq 0 ] ; then
+        continue
+      else
+        exit "$res"
       fi
     fi
 
