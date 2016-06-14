@@ -1,0 +1,75 @@
+<% provide(:title, t("GAME_TITLE", game_id: @game.id)) %>
+
+<div class="jumbotron">
+  <h1><%= t("GAME_HEADER", game_id: @game.id) %></h1>
+</div>
+
+<div class="container">
+  <div class="row">
+      <%= render partial: 'shared/players', :locals => { :game => @game, :current_user => current_user } %>
+  </div>
+</div>
+
+<div class="container">
+  <% if @game.startable?(current_user) %>
+    <%= render 'shared/start_game' %>
+  <% end %>
+
+  <% if @game.joinable?(current_user) %>
+    <%= render 'shared/join_game' %>
+  <% end %>
+
+  <% if @game.over? %>
+    <%= render 'shared/game_over' %>
+  <% end %>
+
+  <% if @game.users_turn?(current_user) && @game.end_phase? %>
+    <%= render 'shared/last_round' %>
+  <% end %>
+
+  <% if @game.waiting_for_players_turn?(current_user) %>
+    <%= render 'shared/waiting_for_players' %>
+  <% end %>
+
+  <% if @game.started? && !@game.over? %>
+    <div class="row">
+      <div class="col-md-6">
+        <h5><%= t(:TRAIN_CARD_DECK) %></h5>
+        <%= render 'shared/train_cards' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @game.started? %>
+    <div class="row">
+      <%= render partial: 'shared/map', :locals => { :game => @game, :current_user => current_user } %>
+    </div>
+  <% end %>
+
+  <% if @game.started? && !@game.over? %>
+    <div class="row">
+        <div class="col-md-6">
+          <h5><%= t(:TRAIN_CARDS_HEADER) %></h5>
+          <%= render partial: 'shared/player_train_cards', :locals => { :game => @game, :game_train_cards => @game.players.for_user(current_user.id).first.game_train_cards, :player => @game.players.for_user(current_user.id).first }%>
+        </div>
+
+        <div class="col-md-6">
+          <h5><%= t(:DESTINATION_TICKETS_HEADER) %></h5>
+
+          <% if @game.waiting_to_discard_destination_tickets?(current_user) %>
+            <%= render 'shared/discard_destination_tickets' %>
+          <% elsif !@game.over? %>
+            <%= render partial: 'shared/destination_tickets', :locals => { :game => @game, :game_destination_tickets => @game.players.for_user(current_user.id).first.game_destination_tickets } %>
+          <% end %>
+
+          <% if @game.destination_ticket_drawable?(current_user) %>
+            <%= render 'shared/draw_destination_tickets' %>
+          <% end %>
+        </div>
+    </div>
+  <% end %>
+
+  <% if !@game.over? %>
+    <%= render 'shared/refresh_game' %>
+  <% end %>
+</div>

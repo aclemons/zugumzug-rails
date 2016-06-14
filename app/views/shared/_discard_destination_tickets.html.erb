@@ -1,0 +1,30 @@
+<%= form_tag(game_player_destination_tickets_path({ :game_id => @game.id, :player_id => @game.turn_player.id }), method: "delete") do |f| %>
+  <table class="table">
+    <tr>
+      <th><%= t(:DESTINATION_TICKET_FROM) %></th>
+      <th><%= t(:DESTINATION_TICKET_TO) %></th>
+      <th><%= t(:DESTINATION_TICKET_POINTS) %></th>
+      <th><%= t(:DESTINATION_TICKET_COMPLETED) %></th>
+      <th><%= t(:DESTINATION_TICKET_DISCARD) %></th>
+    </tr>
+    <% @game.turn_player.game_destination_tickets.each do |game_destination_ticket| %>
+      <tr>
+        <td><%= game_destination_ticket.destination_ticket.from.name %></td>
+        <td><%= game_destination_ticket.destination_ticket.to.name %></td>
+        <td><%= game_destination_ticket.destination_ticket.points %></td>
+        <td><%= game_destination_ticket.completed ? "yes" : "no" %></td>
+        <td>
+          <% if game_destination_ticket.pending? %>
+            <%= check_box_tag(:'destination_ids[]', game_destination_ticket.destination_ticket.id) %></td>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="5">
+        <%= submit_tag(t(:'DISCARD_DESTINATION_TICKETS'),  class: "btn btn-primary btn-xs", role: "button" ) %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+

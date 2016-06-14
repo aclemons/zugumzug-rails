@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= yield(:title) %> | <%= t("MAIN_TITLE") %></title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <% if @game && !@game.new_record? && current_user && !@game.setup_phase? && !@game.users_turn?(current_user) && !@game.over? %>
+      <meta http-equiv="refresh" content="5" />
+    <% end %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <div class="container">
+      <%= render 'layouts/header' %>
+      <% flash.each do |message_type, message| %>
+         <% message_type = "success" if message_type == "notice" %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
+      <hr>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
+</html>

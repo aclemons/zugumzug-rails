@@ -1,0 +1,6 @@
+<% @game.players.each do |player| %>
+  <p>
+    <%= t(:"COLOUR_#{Colour::name(player.colour).upcase}") %>: <%= player.name %><br />
+  </p>
+  <%= render partial: 'shared/destination_tickets', :locals => { :game_destination_tickets => player.game_destination_tickets } %>
+<% end %>

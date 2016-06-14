@@ -1,0 +1,4 @@
+<%= form_tag("/games/#{@game.id}", method: "patch") do |f| %>
+  <%= render 'shared/error_messages', object: @service %>
+  <%= submit_tag(t(:'START_GAME'), class: "btn btn-primary btn-xs", role: "button") %>
+<% end %>

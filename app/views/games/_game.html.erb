@@ -1,0 +1,7 @@
+<tr>
+  <td><%= game.id %></td>
+  <td><%= t("PHASE_#{game.phase}") %></td>
+  <td><%= t("TURN_STATUS_#{game.turn_status}") %></td>
+  <td><%= game.players.count %></td>
+  <td><%= link_to t(:SHOW_GAME_LINK), game %></td>
+</tr>

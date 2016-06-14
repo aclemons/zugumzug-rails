@@ -1,0 +1,36 @@
+<% if game.setup_phase? %>
+  <p><%= t(:GAME_HAS_PLAYER_COUNT, count: game.players.count) %></p>
+<% else %>
+  <table class="table table-striped table-condensed">
+    <tr>
+      <th><%= t(:PLAYER) %></th>
+      <th><%= t(:PLAYER_COLOUR) %></th>
+      <th><%= t(:PLAYER_TRAINS) %></th>
+      <th><%= t(:PLAYER_POINTS) %></th>
+      <th><%= t(:PLAYER_TRAIN_CARDS) %></th>
+      <th><%= t(:PLAYER_DESTINATION_TICKETS) %></th>
+      <% if game.over? %>
+        <th><%= t(:PLAYER_LONGEST_ROUTE) %></th>
+        <th><%= t(:PLAYER_WINNER) %></th>
+      <% end %>
+    </tr>
+    <% game.players.each do |player| %>
+      <% if game.over? && game.winner.id == player.id %>
+        <tr class="warning">
+      <% else %>
+        <tr>
+      <% end %>
+        <td><%= player.name %></td>
+        <td><%= "#{t(:"COLOUR_#{Colour::name(player.colour).upcase}")}" %></td>
+        <td><%= player.train_cars %></td>
+        <td><%= player.points %></td>
+        <td><%= player.game_train_cards.count %></td>
+        <td><%= player.game_destination_tickets.count %></td>
+        <% if game.over? %>
+          <td><%= player.longest_continuous_path ? "✓" : "" %></td>
+          <td><%= game.winner.id == player.id ? "✓" : "" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

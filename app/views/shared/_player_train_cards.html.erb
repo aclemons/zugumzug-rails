@@ -1,0 +1,39 @@
+<% build_allowed = @game.building_allowed?(current_user) %>
+
+<%= form_tag("/games/#{@game.id}/players/#{player.id}/routes", method: "post") do |f| %>
+  <table class="table">
+    <tr>
+      <th><%= t(:TRAIN_CARD_COLOUR_COUNT) %></th>
+      <% if build_allowed %>
+        <th><%= t(:TRAIN_CARD_FOR_ROUTE) %></th>
+      <% end %>
+    </tr>
+    <% game_train_cards.group_by{ |card| card.train_card.colour}.sort_by { |key, gtc_array| t(:"COLOUR_#{Colour::name(gtc_array.first.train_card.colour, true).upcase}") }.each do |key, gtc_array| %>
+      <tr>
+        <td>
+          <%= "#{t(:"COLOUR_#{Colour::name(gtc_array.first.train_card.colour, true).upcase}")} (#{gtc_array.count})" %>
+        </td>
+        <% if build_allowed %>
+          <td>
+            <% gtc_array.each do |gtc| %>
+              <%= check_box_tag(:'train_card_ids[]', gtc.train_card.id) %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+
+    <% if build_allowed %>
+      <tr>
+        <td colspan="2">
+            <%= select_tag(:route_id, options_for_select(game.game_routes.available.map { |game_route| [ "#{game_route.route.from.name} <=> #{game_route.route.to.name} | #{t(:"COLOUR_#{Colour::name(game_route.route.colour).upcase}")}", game_route.route.id] }.sort {|a,b| a[0] <=> b[0] } )) %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= submit_tag(t(:'BUILD_ROUTE'), class: "btn btn-default btn-sm") %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

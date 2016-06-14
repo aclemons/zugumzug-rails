@@ -1,0 +1,20 @@
+<%= form_tag(game_players_path(game_id: @game.id), method: "post", html: { class: "form-inline" }) do |f| %>
+  <div class="form-group">
+    <%= label_tag :'player[name]', t(:PLAYER_NAME), class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= text_field_tag(:'player[name]', current_user.name) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label"><%= t(:CHOOSE_PLAYER_COLOUR) %>:</label>
+
+    <% Player.allowed_player_colours_for_game(@game).each do |colour| %>
+      <%= label_tag(:'player[colour]', t(:"COLOUR_#{Colour::name(colour).upcase}"), class: "radio-inline") %>
+      <%= radio_button_tag(:'player[colour]', colour.to_s) %>
+    <% end %>
+  </div>
+
+  <%= hidden_field_tag(:'player[user_id]', current_user.id) %>
+  <%= submit_tag(t(:'JOIN_GAME'), class: "btn btn-primary") %>
+<% end %>

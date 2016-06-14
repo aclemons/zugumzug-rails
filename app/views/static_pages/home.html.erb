@@ -1,0 +1,8 @@
+<% unless current_user %>
+  <div class="jumbotron">
+    <h1><%= t(:HOME_HEADING) %></h1>
+    <p>
+      <%= link_to t(:REGISTER_LINK), new_user_registration_path, class: "btn btn-lg btn-primary", role: "button" %>
+    </p>
+  </div>
+<% end %>

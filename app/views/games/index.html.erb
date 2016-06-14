@@ -1,0 +1,17 @@
+<% provide(:title, t("ALL_GAMES_TITLE")) %>
+<h1><%= t("ALL_GAMES") %></h1>
+
+<%= will_paginate %>
+
+<table class="table">
+  <tr>
+    <th><%= t("OVERVIEW_GAME_ID") %></th>
+    <th><%= t("OVERVIEW_GAME_PHASE") %></th>
+    <th><%= t("OVERVIEW_GAME_TURN_STATUS") %></th>
+    <th><%= t("OVERVIEW_GAME_PLAYER_COUNT") %></th>
+    <th><%= t("OVERVIEW_GAME_LINK") %></th>
+  </tr>
+  <%= render @games %>
+</table>
+
+<%= will_paginate %>

@@ -1,0 +1,34 @@
+<table class="table">
+  <tr>
+    <th><%= t(:TRAIN_CARD_COLOUR) %></th>
+    <% if @game.train_card_drawable?(current_user) %>
+      <th><%= t(:TRAIN_CARD_DRAW) %></th>
+    <% end %>
+  </tr>
+  <% if @game.train_card_drawable?(current_user) %>
+    <tr>
+      <td>
+        <%= t(:TRAIN_CARD_DECK_DRAW_CARD) %>
+      </td>
+      <td>
+        <%= form_tag("/games/#{@game.id}/players/#{@game.turn_player.id}/train_cards", method: "patch") do |f| %>
+          <%= submit_tag(t(:'DRAW_TRAIN_CARD'), class: "btn btn-default btn-sm") %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% @game.game_train_cards.face_up.sort_by { |gtc| t(:"COLOUR_#{Colour::name(gtc.train_card.colour).upcase}") }.each do |gtc| %>
+    <tr>
+      <td>
+        <%= "#{t(:"COLOUR_#{Colour::name(gtc.train_card.colour, true).upcase}")}" %>
+      </td>
+      <% if @game.train_card_drawable?(current_user) %>
+        <td>
+          <%= form_tag("/games/#{@game.id}/players/#{@game.turn_player.id}/train_cards/#{gtc.train_card.id}", method: "patch") do |f| %>
+            <%= submit_tag(t(:'DRAW_TRAIN_CARD'), class: "btn btn-default btn-sm") %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,153 @@
+de:
+  ABOUT_HEADER: Über
+  ABOUT_LINK: Über
+  ABOUT_TITLE: Über
+  ACCOUNT_MENU: Konto
+  ALL_GAMES: Spielliste
+  ALL_GAMES_TITLE: Spielliste
+  BACK_FROM_EDIT: Zurück
+  BUILD_ROUTE: Route bauen
+  CHOOSE_PLAYER_COLOUR: Bitte eine Farbe für den Spiele auswählen
+  COLOUR_BLACK: schwarz
+  COLOUR_BLUE: blau
+  COLOUR_GREEN: grün
+  COLOUR_GREY: grau
+  COLOUR_LOCOMOTIVE: lokomotive
+  COLOUR_ORANGE: orange
+  COLOUR_PURPLE: lila
+  COLOUR_RED: rot
+  COLOUR_WHITE: weiß
+  COLOUR_YELLOW: gelb
+  CREATE_GAME: Spiel anlegen
+  CREATE_GAME_LINK: Anlegen
+  CREATE_GAME_TITLE: Spiel anlegen
+  CURRENT_PASSWORD_FOR_EDIT: Ihr Passwort wird benötigt, um die Änderungen zu bestätigen
+  DESTINATION_TICKETS_HEADER: Zielkarten
+  DESTINATION_TICKET_COMPLETED: Fertiggestellt
+  DESTINATION_TICKET_DECK: Stapel
+  DESTINATION_TICKET_DISCARD: Zurückgeben?
+  DESTINATION_TICKET_FROM: Von
+  DESTINATION_TICKET_POINTS: Punkte
+  DESTINATION_TICKET_TO: Nach
+  DISCARD_DESTINATION_TICKETS: Bestätigen
+  DRAW_DESTINATION_TICKETS: Ziehen
+  DRAW_TRAIN_CARD: Ziehen
+  EDIT_USER: Profil editieren
+  EDIT_USER_SAVE_BUTTON: Speichern
+  EDIT_USER_TITLE: Editieren
+  FOOTER_TEXT: Zug um Zug von Andrew Clemons
+  GAME_HAS_PLAYER_COUNT: Das Spiel hat derzeit %{count} Spieler
+  GAME_HEADER: Spiel %{game_id}
+  GAME_MENU: Spiele
+  GAME_TITLE: Spiel %{game_id}
+  HOME_HEADING: Willkommen bei Zug um Zug
+  HOME_LINK: Home
+  HOME_TITLE: Home
+  INVALID_PARAM: Ungültiger Parameter
+  JOIN_GAME: Spiel beitreten
+  LAST_ROUND: Letzte Runde
+  LOGOUT_LINK: Ausloggen
+  LOG_IN: Einloggen
+  LOG_IN_LINK: Eingloggen
+  LOG_IN_TITLE: Einloggen
+  MAIN_TITLE: Zug um Zug Rails
+  MY_GAMES_LINK: Liste
+  NO: nein
+  OVERVIEW_GAME_ID: Spiel
+  OVERVIEW_GAME_LINK: Link
+  OVERVIEW_GAME_PHASE: Phase
+  OVERVIEW_GAME_PLAYER_COUNT: Spieler
+  OVERVIEW_GAME_TURN_STATUS: Reihe
+  PASSWORD_LEAVE_BLANK: leerlassen, um das alte Passwort beizubehalten
+  PASSWORD_MIN_CHARS: "Mindestens %{min_chars} Zeichen"
+  PHASE_0: Spiel vorbereiten
+  PHASE_1: Initiale Runde
+  PHASE_2: Spielen
+  PHASE_3: Letzte Runde
+  PHASE_4: Beendet
+  PLAYER: Spieler
+  PLAYER_COLOUR: Farbe
+  PLAYER_DESTINATION_TICKETS: Zielkarten
+  PLAYER_LONGEST_ROUTE: Längste Strecke
+  PLAYER_NAME: Spielername
+  PLAYER_POINTS: Punkte
+  PLAYER_TRAINS: Waggons
+  PLAYER_TRAIN_CARDS: Wagenkarten
+  PLAYER_WINNER: Gewinner
+  PROFILE_LINK: Anzeigen
+  REFRESH_PAGE: Aktualisieren
+  REGISTER_LINK: Registrieren
+  ROUTE_LENGTH: Länge
+  RULES_LIST: Offizielle Spielanleitung
+  SAVE_GAME_BUTTON: Anlegen
+  SETTINGS_LINK: Bearbeiten
+  SHOW_GAME_LINK: Anzeigen
+  SIGN_UP: Registrieren
+  SIGN_UP_TITLE: Registrieren
+  START_GAME: Spiel beginnen
+  SUBMIT_SIGNUP_BUTTON: Register
+  SUBMIT_UPDATE_USER_BUTTON: Speichern
+  TRAIN_CARDS_HEADER: Ihre Wagenkarten
+  TRAIN_CARD_COLOUR: Farbe
+  TRAIN_CARD_COLOUR_COUNT: Farbe (Anzahl)
+  TRAIN_CARD_DECK_DRAW_CARD: stapel
+  TRAIN_CARD_DECK: Wagenkartenstapel
+  TRAIN_CARD_DRAW: Ziehen
+  TRAIN_CARD_FOR_ROUTE: Wagenkarten für Route
+  TURN_STATUS_0: Spielen
+  TURN_STATUS_1: Zielkarten zurückgeben
+  TURN_STATUS_2: Zweite Wagenkarten ziehen
+  TURN_STATUS_3: Warten auf andere Spieler
+  UPDATE_YOUR_PROFILE: Profil aktualisieren
+  WAITING_FOR_OTHER_PLAYERS: Warten auf %{player_name}
+  YES: ja
+  base: basis
+  ZUGUMGZUG: Zug um Zug
+  activerecord:
+    models:
+      user:
+        one: Registrierung
+        other: Registrierungen
+    attributes:
+      user:
+        current_password: "Aktuelles Passwort"
+        email: "Email"
+        password: "Passwort"
+        password_confirmation: "Passwort bestätigen"
+  activemodel:
+    errors:
+      models:
+        build_route:
+          attributes:
+            base:
+              invalid_set_of_train_cards_for_route: "Die Route %{route_id} von %{from} nach %{to} benötigt %{route_length} Wagenkarte(n). Sieh haben %{selected_count} Wagenkarte(n) ausgewählt."
+              not_enough_train_cars_for_route: "Sie haben nur %{train_cars} Waggon(s) übrig. Die Route %{route_id} von %{from} nach %{to} erfordert %{route_length} Waggon(s)."
+              parallel_route_not_allowed_for_game: "Route %{route_id} von %{from} nach %{to} darf bei Spielen mit zwei oder drei Spielern nicht angelegt werden, da %{player_id}/%{player_name} bereite eine Route zwischen den beiden Städten angelegt hat."
+              parallel_route_not_allowed_for_same_player: "Route %{route_id} von %{from} nach %{to} darf nicht angelegt werden, da Sie schon eine Route zwischen den beiden Städten angelegt haben."
+              route_already_built: "Route %{route_id} von %{from} nach %{to} wurde schon von %{player_id}/%{player_name} angelegt."
+              set_of_train_cards_for_route_must_have_matching_colour: "Die ausgewählten Wagenkarten für Route %{route_id} haben unterschiedliche Farben."
+              set_of_train_cards_for_route_must_have_route_colour: "Die ausgewählten Wagenkarten passen farblich nicht zur Route %{route_id}."
+              unknown_route: "Unbekannte Route %{route_id}"
+        discard_destination_tickets:
+          attributes:
+            base:
+              destination_ticket_in_wrong_status_for_discard: Zielkarte %{ticket_id} darf jetzt nicht zurückgegeben werden.
+              invalid_destination_discard_count: Sie dürfen jetzt maximal %{max_discard_count} Zielkarte(n) zurückgeben. Sie haben versucht, %{discard_count} Zielkarten(n) zurückzugeben.
+              player_not_not_have_destination_ticket: Zielkarte %{ticket_id} gehört Ihnen nicht.
+        draw_destination_tickets:
+          attributes:
+            base:
+              no_destination_tickets_available: Es sind keine Zielkarten mehr übrig.
+        draw_train_card:
+          attributes:
+            base:
+              drawing_faceup_locomotive_not_allowed: Die Lokomotive-Karte darf jetzt nicht gezogen werden.
+              no_train_cards_available: Es sind keine Wagenkarten mehr übrig.
+              visible_train_card_with_id_not_found: Es gibt keine Wagenkarte %{train_card_id}
+        start_game:
+          attributes:
+            base:
+              incorrect_player_count_for_game: Ein Spiel besteht aus %{min_players}-%{max_players} Spielern. Das Spiel hat derzeit nur %{player_count} Spieler.
+  will_paginate:
+    previous_label: vorige
+    next_label: nächste

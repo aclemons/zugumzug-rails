@@ -1,0 +1,150 @@
+en:
+  ABOUT_HEADER: About
+  ABOUT_LINK: About
+  ABOUT_TITLE: About
+  ACCOUNT_MENU: Account
+  ALL_GAMES: All Games
+  ALL_GAMES_TITLE: All Games
+  BACK_FROM_EDIT: Back
+  BUILD_ROUTE: Build Route
+  CHOOSE_PLAYER_COLOUR: Choose a colour for your player
+  COLOUR_BLACK: black
+  COLOUR_BLUE: blue
+  COLOUR_GREEN: green
+  COLOUR_GREY: grey
+  COLOUR_LOCOMOTIVE: locomotive
+  COLOUR_ORANGE: orange
+  COLOUR_PURPLE: purple
+  COLOUR_RED: red
+  COLOUR_WHITE: white
+  COLOUR_YELLOW: yellow
+  CREATE_GAME: Create Game
+  CREATE_GAME_LINK: Create
+  CREATE_GAME_TITLE: Create Game
+  CURRENT_PASSWORD_FOR_EDIT: we need your current password to confirm your changes
+  DESTINATION_TICKETS_HEADER: Destination Tickets
+  DESTINATION_TICKET_COMPLETED: Completed
+  DESTINATION_TICKET_DECK: Deck
+  DESTINATION_TICKET_DISCARD: Discard?
+  DESTINATION_TICKET_FROM: From
+  DESTINATION_TICKET_POINTS: Points
+  DESTINATION_TICKET_TO: To
+  DISCARD_DESTINATION_TICKETS: Confirm
+  DRAW_DESTINATION_TICKETS: Draw
+  DRAW_TRAIN_CARD: Draw
+  EDIT_USER: Edit User
+  EDIT_USER_SAVE_BUTTON: Update
+  EDIT_USER_TITLE: Edit
+  FOOTER_TEXT: Ticket to Ride by Andrew Clemons
+  GAME_HAS_PLAYER_COUNT: Currently the game has %{count} player(s)
+  GAME_HEADER: Game %{game_id}
+  GAME_MENU: Games
+  GAME_TITLE: Game %{game_id}
+  HOME_HEADING: Welcome to Ticket to Ride
+  HOME_LINK: Home
+  HOME_TITLE: Home
+  INVALID_PARAM: Invalid parameter
+  JOIN_GAME: Join Game
+  LAST_ROUND: Last Round
+  LOGOUT_LINK: Logout
+  LOG_IN: Log In
+  LOG_IN_LINK: Login
+  LOG_IN_TITLE: Log In
+  MAIN_TITLE: Ticket to Ride Rails
+  MY_GAMES_LINK: List
+  NO: no
+  OVERVIEW_GAME_ID: Game
+  OVERVIEW_GAME_LINK: Link
+  OVERVIEW_GAME_PHASE: Phase
+  OVERVIEW_GAME_PLAYER_COUNT: Players
+  OVERVIEW_GAME_TURN_STATUS: Turn
+  PASSWORD_LEAVE_BLANK: leave blank if you don't want to change it
+  PASSWORD_MIN_CHARS: "%{min_chars} characters minimum"
+  PHASE_0: Setting up game
+  PHASE_1: Initial round
+  PHASE_2: Playing
+  PHASE_3: Final round
+  PHASE_4: Ended
+  PLAYER: Player
+  PLAYER_COLOUR: Colour
+  PLAYER_DESTINATION_TICKETS: Destination Tickets
+  PLAYER_LONGEST_ROUTE: Longest Route
+  PLAYER_NAME: Player Name
+  PLAYER_POINTS: Points
+  PLAYER_TRAINS: Trains
+  PLAYER_TRAIN_CARDS: Train Cards
+  PLAYER_WINNER: Winner
+  PROFILE_LINK: View Profile
+  REFRESH_PAGE: Refresh
+  REGISTER_LINK: Register
+  ROUTE_LENGTH: Length
+  RULES_LIST: Official Game Rules
+  SAVE_GAME_BUTTON: Create
+  SETTINGS_LINK: Update Profile
+  SHOW_GAME_LINK: View
+  SIGN_UP: Sign Up
+  SIGN_UP_TITLE: Sign Up
+  START_GAME: Start Game
+  SUBMIT_SIGNUP_BUTTON: Sign Up
+  SUBMIT_UPDATE_USER_BUTTON: Update
+  TRAIN_CARDS_HEADER: Your train cards
+  TRAIN_CARD_COLOUR: Colour
+  TRAIN_CARD_COLOUR_COUNT: Colour (count)
+  TRAIN_CARD_DECK_DRAW_CARD: deck
+  TRAIN_CARD_DECK: Train Card Deck
+  TRAIN_CARD_DRAW: Draw
+  TRAIN_CARD_FOR_ROUTE: Cards for Route
+  TURN_STATUS_0: Playing
+  TURN_STATUS_1: Discarding destination tickets
+  TURN_STATUS_2: Drawing second train card
+  TURN_STATUS_3: Waiting for players to join
+  UPDATE_YOUR_PROFILE: Update your profile
+  WAITING_FOR_OTHER_PLAYERS: Waiting for %{player_name} to finish
+  YES: yes
+  base: basis
+  ZUGUMGZUG: Ticket to Ride
+  activerecord:
+    models:
+      user:
+        one: Registration
+        other: Registration
+    attributes:
+      user:
+        current_password: "Current Password"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+  activemodel:
+    errors:
+      models:
+        build_route:
+          attributes:
+            base:
+              invalid_set_of_train_cards_for_route: "Route %{route_id} from %{from} to %{to} needs %{route_length} train card(s). You selected %{selected_count} train card(s)."
+              not_enough_train_cars_for_route: "You only have %{train_cars} train car(s) left. Route %{route_id} from %{from} to %{to} needs %{route_length} train car(s)."
+              parallel_route_not_allowed_for_game: "Route %{route_id} from %{from} to %{to} cannot be built in this game of two or three players since %{player_id}/%{player_name} has already built a route between these cities."
+              parallel_route_not_allowed_for_same_player: "Route %{route_id} from %{from} to %{to} cannot be built because you have already built a route between these cities."
+              route_already_built: "Route %{route_id} from %{from} to %{to} was already built by %{player_id}/%{player_name}."
+              set_of_train_cards_for_route_must_have_matching_colour: "The cards selected to build %{route_id} are not all of the same colour."
+              set_of_train_cards_for_route_must_have_route_colour: "The cards selected to build %{route_id} are do not match the route colour."
+              unknown_route: "No such route %{route_id}"
+        discard_destination_tickets:
+          attributes:
+            base:
+              destination_ticket_in_wrong_status_for_discard: Ticket %{ticket_id} cannot be discarded now.
+              invalid_destination_discard_count: You may only discard a maximum of %{max_discard_count} destination ticket(s). You tried discarding %{discard_count}.
+              player_not_not_have_destination_ticket: You do not have ticket %{ticket_id}
+        draw_destination_tickets:
+          attributes:
+            base:
+              no_destination_tickets_available: There are no destination tickets left.
+        draw_train_card:
+          attributes:
+            base:
+              drawing_faceup_locomotive_not_allowed: The locomotive card cannot be drawn now.
+              no_train_cards_available: There are no train cards left.
+              visible_train_card_with_id_not_found: There is no visible train card %{train_card_id}
+        start_game:
+          attributes:
+            base:
+              incorrect_player_count_for_game: A games must have between %{min_players} and %{max_players} players to start. The game currently has %{player_count} player(s).

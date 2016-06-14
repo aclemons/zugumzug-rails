@@ -1,0 +1,47 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><%= t(:ZUGUMGZUG) %></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><%= link_to t(:HOME_LINK), root_path %></li>
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t(:CREATE_GAME_LINK), '/games/new' %></li>
+              <li><%= link_to t(:MY_GAMES_LINK), '/games' %></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t(:PROFILE_LINK), current_user %></li>
+              <li><%= link_to t(:SETTINGS_LINK), edit_user_registration_path(current_user) %></li>
+            </ul>
+          </li>
+        <% end %>
+        <li><%= link_to t(:ABOUT_LINK), about_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li>
+            <%= form_tag(destroy_user_session_path, method: 'delete') do |f| %>
+              <%= submit_tag("#{t(:'LOGOUT_LINK')}", class: "btn btn-sm btn-primary") %>
+            <% end %>
+          </li>
+        <% else %>
+          <li class="active"><%= link_to t(:REGISTER_LINK), new_user_registration_path %></li>
+          <li><%= link_to t(:LOG_IN_LINK), new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

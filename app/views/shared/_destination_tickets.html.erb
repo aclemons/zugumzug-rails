@@ -1,0 +1,24 @@
+<table class="table">
+  <tr>
+    <th><%= t(:DESTINATION_TICKET_FROM) %></th>
+    <th><%= t(:DESTINATION_TICKET_TO) %></th>
+    <th><%= t(:DESTINATION_TICKET_POINTS) %></th>
+    <th><%= t(:DESTINATION_TICKET_COMPLETED) %></th>
+  </tr>
+  <% game_destination_tickets.each do |game_destination_ticket| %>
+    <% if game_destination_ticket.completed %>
+      <tr class="success">
+    <% else %>
+      <% if @game.over? %>
+        <tr class="danger">
+      <% else %>
+        <tr>
+      <% end %>
+    <% end %>
+      <td><%= game_destination_ticket.destination_ticket.from.name %></td>
+      <td><%= game_destination_ticket.destination_ticket.to.name %></td>
+      <td><%= game_destination_ticket.destination_ticket.points %></td>
+      <td><%= game_destination_ticket.completed ? t(:YES) : t(:NO) %></td>
+    </tr>
+  <% end %>
+</table>

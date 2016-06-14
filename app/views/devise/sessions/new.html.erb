@@ -1,0 +1,20 @@
+<% provide(:title, t(:LOG_IN_TITLE)) %>
+
+<div class="jumbotron">
+  <h2><%= t(:LOG_IN) %></h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-inline" }) do |f| %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+
+    <%= f.submit "Log in", class: "btn btn-default" %>
+  <% end %>
+</div>
+

@@ -1,0 +1,3 @@
+<%= form_tag("/games", method: "post") do |f| %>
+  <%= submit_tag yield(:button_text), class: "btn btn-primary" %>
+<% end %>
