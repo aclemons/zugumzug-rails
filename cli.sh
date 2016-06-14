@@ -565,7 +565,7 @@ check_user() {
 }
 
 logout() {
-  curl -s -f -X DELETE -b "$COOKIESTORE" -c "$COOKIESTORE" -H "Accept: application/json" -H "Content-Type: application/json" "$URL/users/sign_out" 2>&1 > /dev/null
+  curl -s -f -X DELETE -b "$COOKIESTORE" -c "$COOKIESTORE" -H "Accept: application/json" -H "Content-Type: application/json" "$URL/users/sign_out" > /dev/null 2>&1
   userid=""
   useremail=""
   username=""
@@ -605,7 +605,7 @@ register_user() {
     password_confirmation=$(sed '4!d' < "$DIALOG_TMP")
     > "$DIALOG_TMP"
 
-    response="$(curl -v -H "Accept: application/json" "$URL/users" --data "user[email]=$email" --data "user[name]=$email" --data "user[password]=$password" --data "user[password_confirmation]=$password_confirmation" 2>&1 | tr -d '\r')"
+    response="$(curl -v -H "Accept: application/json" "$URL/users" --data "user[email]=$email" --data "user[name]=$name" --data "user[password]=$password" --data "user[password_confirmation]=$password_confirmation" 2>&1 | tr -d '\r')"
 
     if printf "%s\n" "$response" | grep "HTTP/1.1 201 Created" > /dev/null 2>&1 ; then
       login
