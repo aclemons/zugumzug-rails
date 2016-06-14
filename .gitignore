@@ -26,3 +26,5 @@ tags
 *.swp
 .byebug_history
 
+/public/assets//*
+/certs/*
