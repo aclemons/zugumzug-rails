@@ -18,7 +18,7 @@ gem 'will_paginate-bootstrap', '1.0.1'
 gem 'cancancan',            '~> 1.10'
 gem 'gnuplot', '2.6.2'
 gem 'nokogiri'
-
+gem 'thin'
 
 group :development, :test do
   gem 'byebug',      '8.2.5'
@@ -30,15 +30,14 @@ group :development do
   gem 'pg',          '0.17.1'
 end
 
-group :test do
+group :production, :test do
   gem 'sqlite3',            '1.3.11'
+end
+
+group :test do
   gem 'cucumber-rails',     '1.4.3', :require => false
   gem 'database_cleaner',   '1.5.2'
   gem 'simplecov',          '0.11.2'
   gem 'simplecov-html',     '0.10.0'
-end
-
-group :production do
-  gem 'sqlite3',            '1.3.11'
 end
 
