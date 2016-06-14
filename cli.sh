@@ -688,7 +688,7 @@ resume_game() {
 
       pending_games="$(printf "%s\n" "$pending_games")"
 
-      eval dialog "$DIALOG_OPTIONS" --title "$(quote "Game ID - Players Phase")" --menu "$(quote "Please choose a game")" 17 75 7 "$pending_games" 2> "$DIALOG_TMP" || continue
+      eval dialog "$DIALOG_OPTIONS" --cancel-label "$(quote "Back")" --title "$(quote "Game ID - Players Phase")" --menu "$(quote "Please choose a game")" 17 75 7 "$pending_games" 2> "$DIALOG_TMP" || continue
       game_id=$(cat "$DIALOG_TMP")
     fi
 
