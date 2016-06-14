@@ -308,11 +308,6 @@ class GamePresenter
 
     x_offset, y_offset = calculate_vector_shift(multiplier, angle)
 
-    if route.from.name == "Portland" || route.to.name == 'Portland'
-      puts "From #{route.from.name} to #{route.to.name}"
-      puts "Angle #{angle} => xmult #{x_offset} ymult #{y_offset}"
-    end
-
     adjusted_from_x = route.from.longitude.to_f + x_offset
     adjusted_from_y = route.from.latitude.to_f + x_offset
 
@@ -330,7 +325,7 @@ class GamePresenter
 
     arrow_set_stmts << "style arrow #{arrow_style} nohead ls #{arrow_style} lc rgb \"#{colour_name}\""
 
-    input << Edge.new( adjusted_from_x, adjusted_from_y, adjusted_x_diff, adjusted_y_diff, arrow_style, route_id, game_route)
+    input << Edge.new( adjusted_from_x, adjusted_from_y, adjusted_x_diff, adjusted_y_diff, arrow_style, route_id, game_route )
   end
 
   def angle(a, b)

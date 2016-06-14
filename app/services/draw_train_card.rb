@@ -21,7 +21,6 @@ class DrawTrainCard < AbstractService
       end
 
       unless card_may_be_drawn?(drawn_card)
-        byebug
         errors.add(:base, :drawing_faceup_locomotive_not_allowed)
         next false
       end
