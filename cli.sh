@@ -661,7 +661,7 @@ join_game() {
 resume_game() {
   # shellcheck disable=SC2159
   while [ 0 ] ; do
-    eval dialog "$DIALOG_OPTIONS" --title "$(quote "Please enter the game id, or leave empty for a list of games to join")" --inputbox "$(quote "Game ID: ")" 17 75 2> "$DIALOG_TMP" || break
+    eval dialog "$DIALOG_OPTIONS" --cancel-label "$(quote "Back")" --title "$(quote "Please enter the game id, or leave empty for a list of games to join")" --inputbox "$(quote "Game ID: ")" 17 75 2> "$DIALOG_TMP" || break
     game_id=$(cat "$DIALOG_TMP")
 
     if [ "x$game_id" = "xlist" ] || [ "x$game_id" = "x" ] ; then
@@ -1057,7 +1057,7 @@ while [ 0 ] ; do
           height=$((height - 2))
         fi
 
-        eval dialog "$DIALOG_OPTIONS" --menu "$(quote "Please choose an option")" 17 75 "$height" "$turn_options" 2> "$DIALOG_TMP" || break
+        eval dialog "$DIALOG_OPTIONS" --cancel-label "$(quote "Back")" --menu "$(quote "Please choose an option")" 17 75 "$height" "$turn_options" 2> "$DIALOG_TMP" || break
 
         action="$(cat "$DIALOG_TMP")"
 
