@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= yield(:title) %> | <%= t("MAIN_TITLE") %></title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <% if @game && !@game.new_record? && current_user && !@game.setup_phase? && !@game.users_turn?(current_user) && !@game.over? %>
-      <meta http-equiv="refresh" content="7" />
-    <% end %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
+<!--
+  <%= request.path %>
+-->
+    <% if @game && !@game.new_record? && current_user && !@game.setup_phase? && !@game.users_turn?(current_user) && !@game.over? && current_page?(game_path(@game.id)) %>
+      <%= render 'layouts/refresh' %>
+    <% end %>
   </head>
   <body>
     <div class="container">
