@@ -14,6 +14,10 @@ class GamesController < ApplicationController
   end
 
   def show
+    if !@game.setup_phase? && !@game.users_turn?(current_user) && !@game.over?
+      @refresh_game = true
+    end
+
     respond_to do |format|
       format.html
       format.json

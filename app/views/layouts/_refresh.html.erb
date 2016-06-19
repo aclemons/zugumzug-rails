@@ -1,2 +1,8 @@
-<meta http-equiv="refresh" content="7" />
-
+<% if @refresh_game %>
+  <script>
+    zugumzug_refresh=window.setTimeout(function(){window.location.href=window.location.href},7000);
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="7" />
+  </noscript>
+<% end %>
