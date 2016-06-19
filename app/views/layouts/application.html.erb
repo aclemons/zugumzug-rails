@@ -7,7 +7,7 @@
     <title><%= yield(:title) %> | <%= t("MAIN_TITLE") %></title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <% if @game && !@game.new_record? && current_user && !@game.setup_phase? && !@game.users_turn?(current_user) && !@game.over? %>
-      <meta http-equiv="refresh" content="5" />
+      <meta http-equiv="refresh" content="7" />
     <% end %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
