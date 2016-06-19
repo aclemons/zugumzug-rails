@@ -288,7 +288,7 @@ plot_map() {
   # first output all the route data with colour
   # shifting some bits where the routes overlap
   printf "%s\n" "$game_data" | jsawk -n 'out(this.routes)' | jsawk -n "out(this.from_latitude + ',' + this.from_longitude + ',' + this.to_latitude + ',' + this.to_longitude + ',' + this.from_name + ',' + this.to_name + ',' + this.length + ',' + this.colour_name + ',' + (this.player_id === null ? this.colour + 10 : this.player_colour + 20));" | sort | awk -F, '
-BEGIN { multiplier = 0.1 }
+BEGIN { multiplier = 0.2 }
 $1$2$3$4 != key {
   if (key != "") shift_and_output_data(last, count)
 
@@ -327,7 +327,7 @@ function shift_and_output_data(array, array_size) {
 
   for (x = 1; x <= array_size; x++) {
     if (array_size > 1) {
-      angle = atan2(array[x,3], array[x,2]) * 180.0 / atan2(0, -1)
+      angle = abs(atan2(array[x,3], array[x,2]) * 180.0 / atan2(0, -1))
       angle_int = int(angle)
 
       if (angle_int == 90) {
@@ -349,7 +349,9 @@ function shift_and_output_data(array, array_size) {
 
     printf("%s,%s,%s,%s,%s\n", array[x,0], array[x,1], array[x,2] - array[x,0], array[x,3] - array[x,1], array[x,4])
   }
-}' > "$ROUTE_DATA"
+}
+function abs(v) {return v < 0 ? -v : v}
+' > "$ROUTE_DATA"
 
   > "$PLAYER_CITY_DATA"
   cat "$CITY_DATA" > "$NON_PLAYER_CITY_DATA"
@@ -368,6 +370,23 @@ function shift_and_output_data(array, array_size) {
     printf "set style arrow %s nohead linestyle %s\n" "$((colour + 10))" "$((colour + 10))"
     printf "set style arrow %s nohead linestyle %s\n" "$((colour + 20))" "$((colour + 20))"
   done)"
+
+  STATUS="$(for i in $(seq 1 "$player_count") ; do
+    idx=$((i-1))
+
+    local_user_id="$(printf "%s\n" "$game_data" | jsawk "return this.players[$idx]" | jsawk -n 'out(this.user_id)')"
+
+    local_points="$(printf "%s\n" "$game_data" | jsawk "return this.players[$idx]" | jsawk -n 'out(this.points)')"
+    local_name="$(printf "%s\n" "$game_data" | jsawk "return this.players[$idx]" | jsawk -n 'out(this.name)')"
+    local_trains="$(printf "%s\n" "$game_data" | jsawk "return this.players[$idx]" | jsawk -n 'out(this.train_cars)')"
+    local_colour="$(printf "%s\n" "$game_data" | jsawk "return this.players[$idx]" | jsawk -n 'out(this.colour_name)')"
+    local_player_colour_name="$(printf "%s" "$local_colour" | tr '[:lower:]' '[:upper:]')"
+    local_colour_id="$(printf "%s\n" "$game_data" | jsawk "return this.players[$idx]" | jsawk -n 'out(this.colour)')"
+    local_gnuplot_colour="$(colour_name_for_id "$local_colour_id")"
+
+    printf "set label %s \"%s: %s / Train(s) %s / Points %s\"\n" "$((i + 1))" "$local_player_colour_name" "$local_name" "$local_trains" "$local_points"
+    printf "set label %s at -84.35,%s tc rgb \"%s\"\n" "$((i + 1))" "$(awk "BEGIN { print 49.899444 - ($i * 0.5); exit }")" "$local_gnuplot_colour"
+  done)";
 
   destination_tickets="$(print_destination_tickets "$player" | escape_for_dialog)"
   cards_label="$destination_tickets"
@@ -400,8 +419,7 @@ set noclip two
 set datafile separator ","
 
 set label 1 "$cards_label" at $label_coordinates
-set label 2 "$(printf "%s: %s / Train(s) %s / Points %s\n" "$player_colour_name" "$player_name" "$player_trains" "$player_points")"
-set label 2 at -84.35,49.899444 tc "$(colour_name_for_id "$player_colour_id")"
+$STATUS
 
 $STYLES
 
@@ -725,7 +743,6 @@ refresh_game() {
     player_name="$(printf "%s\n" "$player" | jsawk -n 'out(this.name)')"
     player_points="$(printf "%s\n" "$player" | jsawk -n 'out(this.points)')"
     player_colour="$(printf "%s\n" "$player" | jsawk -n 'out(this.colour_name)')"
-    player_colour_id="$(printf "%s\n" "$player" | jsawk -n 'out(this.colour)')"
     player_colour_name="$(printf "%s\n" "$player" | jsawk -n 'out(this.colour_name)' | tr '[:lower:]' '[:upper:]')"
     player_dialog_colour="$(dialog_colour_for_name "$player_colour")"
     player_trains="$(printf "%s\n" "$player" | jsawk -n 'out(this.train_cars)')"

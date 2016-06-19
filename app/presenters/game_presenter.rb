@@ -306,7 +306,7 @@ class GamePresenter
 
     angle = angle(from, to)
 
-    x_offset, y_offset = calculate_vector_shift(multiplier, angle)
+    x_offset, y_offset = calculate_vector_shift(multiplier, angle.abs)
 
     adjusted_from_x = route.from.longitude.to_f + x_offset
     adjusted_from_y = route.from.latitude.to_f + x_offset
