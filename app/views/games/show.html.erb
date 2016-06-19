@@ -1,16 +1,11 @@
 <% provide(:title, t("GAME_TITLE", game_id: @game.id)) %>
 
-<div class="jumbotron">
-  <h1><%= t("GAME_HEADER", game_id: @game.id) %></h1>
-</div>
-
-<div class="container">
-  <div class="row">
-      <%= render partial: 'shared/players', :locals => { :game => @game, :current_user => current_user } %>
+  <div class="jumbotron">
+    <h1><%= t("GAME_HEADER", game_id: @game.id) %></h1>
   </div>
-</div>
 
-<div class="container">
+  <%= render partial: 'shared/players', :locals => { :game => @game, :current_user => current_user } %>
+
   <% if @game.startable?(current_user) %>
     <%= render 'shared/start_game' %>
   <% end %>
@@ -72,4 +67,4 @@
   <% if !@game.over? %>
     <%= render 'shared/refresh_game' %>
   <% end %>
-</div>
+
