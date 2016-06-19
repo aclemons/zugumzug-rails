@@ -18,7 +18,7 @@
       <td><%= game_destination_ticket.destination_ticket.from.name %></td>
       <td><%= game_destination_ticket.destination_ticket.to.name %></td>
       <td><%= game_destination_ticket.destination_ticket.points %></td>
-      <td><%= game_destination_ticket.completed ? t(:YES) : t(:NO) %></td>
+      <td><%= game_destination_ticket.completed ? t(:"DESTINATION_COMPLETED") : t(:"DESTINATION_NOT_COMPLETED") %></td>
     </tr>
   <% end %>
 </table>

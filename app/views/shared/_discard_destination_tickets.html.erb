@@ -12,7 +12,7 @@
         <td><%= game_destination_ticket.destination_ticket.from.name %></td>
         <td><%= game_destination_ticket.destination_ticket.to.name %></td>
         <td><%= game_destination_ticket.destination_ticket.points %></td>
-        <td><%= game_destination_ticket.completed ? "yes" : "no" %></td>
+        <td><%= game_destination_ticket.completed ? t(:"DESTINATION_COMPLETED") : t(:"DESTINATION_NOT_COMPLETED") %></td>
         <td>
           <% if game_destination_ticket.pending? %>
             <%= check_box_tag(:'destination_ids[]', game_destination_ticket.destination_ticket.id) %></td>

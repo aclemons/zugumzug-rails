@@ -22,6 +22,8 @@ de:
   CREATE_GAME_LINK: Anlegen
   CREATE_GAME_TITLE: Spiel anlegen
   CURRENT_PASSWORD_FOR_EDIT: Ihr Passwort wird benötigt, um die Änderungen zu bestätigen
+  DESTINATION_COMPLETED: "ja"
+  DESTINATION_NOT_COMPLETED: "nein"
   DESTINATION_TICKETS_HEADER: Zielkarten
   DESTINATION_TICKET_COMPLETED: Fertiggestellt
   DESTINATION_TICKET_DECK: Stapel
@@ -52,7 +54,6 @@ de:
   LOG_IN_TITLE: Einloggen
   MAIN_TITLE: Zug um Zug Rails
   MY_GAMES_LINK: Liste
-  NO: nein
   OVERVIEW_GAME_ID: Spiel
   OVERVIEW_GAME_LINK: Link
   OVERVIEW_GAME_PHASE: Phase
@@ -90,8 +91,8 @@ de:
   TRAIN_CARDS_HEADER: Ihre Wagenkarten
   TRAIN_CARD_COLOUR: Farbe
   TRAIN_CARD_COLOUR_COUNT: Farbe (Anzahl)
-  TRAIN_CARD_DECK_DRAW_CARD: stapel
   TRAIN_CARD_DECK: Wagenkartenstapel
+  TRAIN_CARD_DECK_DRAW_CARD: stapel
   TRAIN_CARD_DRAW: Ziehen
   TRAIN_CARD_FOR_ROUTE: Wagenkarten für Route
   TURN_STATUS_0: Spielen
@@ -100,9 +101,8 @@ de:
   TURN_STATUS_3: Warten auf andere Spieler
   UPDATE_YOUR_PROFILE: Profil aktualisieren
   WAITING_FOR_OTHER_PLAYERS: Warten auf %{player_name}
-  YES: ja
-  base: basis
   ZUGUMGZUG: Zug um Zug
+  base: basis
   activerecord:
     models:
       user:

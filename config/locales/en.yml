@@ -22,6 +22,8 @@ en:
   CREATE_GAME_LINK: Create
   CREATE_GAME_TITLE: Create Game
   CURRENT_PASSWORD_FOR_EDIT: we need your current password to confirm your changes
+  DESTINATION_COMPLETED: "yes"
+  DESTINATION_NOT_COMPLETED: "no"
   DESTINATION_TICKETS_HEADER: Destination Tickets
   DESTINATION_TICKET_COMPLETED: Completed
   DESTINATION_TICKET_DECK: Deck
@@ -52,7 +54,6 @@ en:
   LOG_IN_TITLE: Log In
   MAIN_TITLE: Ticket to Ride Rails
   MY_GAMES_LINK: List
-  NO: no
   OVERVIEW_GAME_ID: Game
   OVERVIEW_GAME_LINK: Link
   OVERVIEW_GAME_PHASE: Phase
@@ -90,8 +91,8 @@ en:
   TRAIN_CARDS_HEADER: Your train cards
   TRAIN_CARD_COLOUR: Colour
   TRAIN_CARD_COLOUR_COUNT: Colour (count)
-  TRAIN_CARD_DECK_DRAW_CARD: deck
   TRAIN_CARD_DECK: Train Card Deck
+  TRAIN_CARD_DECK_DRAW_CARD: deck
   TRAIN_CARD_DRAW: Draw
   TRAIN_CARD_FOR_ROUTE: Cards for Route
   TURN_STATUS_0: Playing
@@ -100,9 +101,8 @@ en:
   TURN_STATUS_3: Waiting for players to join
   UPDATE_YOUR_PROFILE: Update your profile
   WAITING_FOR_OTHER_PLAYERS: Waiting for %{player_name} to finish
-  YES: yes
-  base: basis
   ZUGUMGZUG: Ticket to Ride
+  base: basis
   activerecord:
     models:
       user:
