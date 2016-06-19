@@ -111,8 +111,6 @@ class GamePresenter
       node = xmldoc.xpath("//*[local-name()='g' and @id='gnuplot_plot_#{plot_id}']//*[local-name()='path']")[0]
       node['class'] = "route"
       node['id'] = "route-#{route_id}"
-      node['onmousemove'] = "ShowTooltip(evt, 'Route ##{route_id} - #{game_route.route.from.name} <=> #{game_route.route.to.name}')"
-      node['onmouseout'] = "HideTooltip(evt)"
       node['onclick'] = "SelectRoute(evt, '#{route_id}')"
 
 
@@ -157,26 +155,6 @@ class GamePresenter
         select_list = document.getElementById('route_id');
       }
 
-      function ShowTooltip(evt, mouseovertext)
-      {
-        tooltip.setAttributeNS(null, "x", evt.clientX + 11);
-        tooltip.setAttributeNS(null, "y", evt.clientY + 27);
-        tooltip.firstChild.data = mouseovertext;
-        tooltip.setAttributeNS(null, "visibility", "visible");
-
-        length = tooltip.getComputedTextLength();
-        tooltip_bg.setAttributeNS(null, "width", length + 8);
-        tooltip_bg.setAttributeNS(null, "x", evt.clientX + 8);
-        tooltip_bg.setAttributeNS(null, "y", evt.clientY + 14);
-        tooltip_bg.setAttributeNS(null, "visibility", "visible");
-      }
-
-      function HideTooltip(evt)
-      {
-        tooltip.setAttributeNS(null, "visibility", "hidden");
-        tooltip_bg.setAttributeNS(null, "visibility", "hidden");
-      }
-
       function SelectRoute(evt, route_id)
       {
         for (var i = 0; i < select_list.options.length; i++)
@@ -193,38 +171,11 @@ class GamePresenter
 
     style = Nokogiri::XML::Node.new("style", xmldoc)
     style.content =%{
-      .tooltip_bg{
-        fill: white;
-        stroke: black;
-        stroke-width: 1;
-        opacity: 0.85;
-      }
       path {
         pointer-events: all;
       }
     }
     xmldoc.root.prepend_child(style)
-
-    tooltip_bg = Nokogiri::XML::Node.new("rect", xmldoc)
-    tooltip_bg['id']="tooltip_bg"
-    tooltip_bg['class']="tooltip_bg"
-    tooltip_bg['x']="0"
-    tooltip_bg['y']="0"
-    tooltip_bg['rx']="4"
-    tooltip_bg['ry']="4"
-    tooltip_bg['width']="55"
-    tooltip_bg['height']="17"
-    tooltip_bg['visibility']="hidden"
-    xmldoc.root.add_child(tooltip_bg)
-
-    tooltip = Nokogiri::XML::Node.new("text", xmldoc)
-    tooltip['id']="tooltip"
-    tooltip['class']="tooltip"
-    tooltip['x']="0"
-    tooltip['y']="0"
-    tooltip['visibility']="hidden"
-    tooltip.content = "Tooltip"
-    xmldoc.root.add_child(tooltip)
 
     xmldoc.root['onload'] = "init(evt)"
 
