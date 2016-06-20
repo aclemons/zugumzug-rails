@@ -150,8 +150,6 @@ class GamePresenter
           svgDocument = evt.target.ownerDocument;
         }
 
-        tooltip = svgDocument.getElementById('tooltip');
-        tooltip_bg = svgDocument.getElementById('tooltip_bg');
         select_list = document.getElementById('route_id');
       }
 
