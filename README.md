@@ -2,6 +2,9 @@
 
 This is a simple implementation of the game Zug um Zug as a Rails app.
 
+A special thanks to **Patrick Volkerding** of [Slackware Linux](http://www.slackware.com/)
+for recompiling gnuplot in Slackware 14.2 with libcaca support. Buy a subscription if you can.
+
 ## Installation
 
 This requires `ruby` (tested with `ruby 2.2.5p319`) and the ruby gem `bundler` (tested with `1.12.1`).
