@@ -19,6 +19,7 @@ gem 'cancancan',            '~> 1.10'
 gem 'gnuplot', '2.6.2'
 gem 'nokogiri'
 gem 'thin'
+gem 'therubyracer'
 
 group :development, :test do
   gem 'byebug',      '8.2.5'

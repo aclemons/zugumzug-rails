@@ -28,3 +28,5 @@ tags
 
 /public/assets/*
 /certs/*
+
+/vendor/bundle
