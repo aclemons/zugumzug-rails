@@ -43,7 +43,7 @@ Environment variables affect how the script runs:
 Options mirror the environment variables above:
   --url       - same as URL
   --verbose   - same as VERBOSE=yes
-  --no-colour - same as COULOURS=no
+  --no-colours - same as COULOURS=no
 
 Examples
   URL=http://10.43.0.13:3000 ./cli.sh
@@ -353,6 +353,9 @@ function shift_and_output_data(array, array_size) {
 function abs(v) {return v < 0 ? -v : v}
 ' > "$ROUTE_DATA"
 
+  > "$BUILT_ROUTE_DATA"
+  printf "%s\n" "$game_data" | jsawk -n 'out(this.routes)' | jsawk -n "if (this.player_name !== null) { out(this.from_latitude + ',' + this.from_longitude + ',' + this.to_latitude + ',' + this.to_longitude + ',' + this.player_name); }" | sort | awk -F, '$1$2$3$4 != key { if (key != "") print out ; key=$1$2$3$4 ; player=$5 ; out=sprintf("%s,%s,%s,%s,%s",$1, $2, $3, $4, player); next } { player=$5; out=sprintf("%s|%s", out, player) } END { print out }' > "$BUILT_ROUTE_DATA"
+
   > "$PLAYER_CITY_DATA"
   cat "$CITY_DATA" > "$NON_PLAYER_CITY_DATA"
 
@@ -425,7 +428,8 @@ $STYLES
 
 plot '$ROUTE_DATA' using 1:2:3:4:5 with vectors arrowstyle variable notitle, \
      '$NON_PLAYER_CITY_DATA' using 2:1:3 with labels center offset 1,1 point pt 4 ps 0.5 notitle, \
-     '$PLAYER_CITY_DATA' using 2:1:3 with labels center offset 1,1 point pt 4 ps 0.5 lc rgb "$player_colour" notitle
+     '$PLAYER_CITY_DATA' using 2:1:3 with labels center offset 1,1 point pt 4 ps 0.5 lc rgb "$player_colour" notitle, \
+     '$BUILT_ROUTE_DATA' using (\$2 + (\$4-\$2) / 2):(\$1 + (\$3-\$1) / 2):5 with labels notitle
 EOF
 
   gnuplot -c "$GNUPLOT_TMP"
@@ -850,7 +854,7 @@ while [ 0 ]; do
     shift
 
     VERBOSE="yes"
-  elif [ "x$1" = "x--no-colour" ] ; then
+  elif [ "x$1" = "x--no-colours" ] ; then
     shift
 
     COLOURS=no
